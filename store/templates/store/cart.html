@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+    
+    {% block title %} 
+        Shopping Cart
+    {% endblock %}
+
+    {% block content %}
+    <h1><span class="badge bg-secondary">Shopping Cart</span></h1>
+    <table class="table table-hover">
+        <tbody class="table-info">
+            <tr>
+                <th>
+                    Items
+                </th>
+                <td>
+                    {% for item in items %}
+                    <div>
+                        {{item.quantity}} x {{item.name}}
+                    </div>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Shopping</th>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <th>Taxes ({{ tax_rate }}%)</th>
+                <td>${{tax_total | floatformat:3}}</td>
+            </tr>
+        </tbody>
+        <tfoot class="table-dark">
+            <tr>
+                <th>Total</th>
+                <td>${{total|floatformat:2}}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    {% endblock%}

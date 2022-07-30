@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+    
+    {% block title %} 
+        {{product.name}}
+    {% endblock %}
+
+    {% block content %}
+    <div class="bg-light p-5 rounded mt-3">
+        <h2>{{product.name}}</h2>
+        <p class="lead">{{product.description}}</p>
+
+        {% if product.is_on_sale %}
+            <div class="shadow-lg p-3 mb-5 bg-body rounded text-info bg-info bg-opacity-10 ">
+                <p class="lead">
+                    Regular Price: <del>${{product.get_price|floatformat:2}}</del> <br>
+                    <strong>SALE: ${{product.current_price|floatformat:2}}</strong>
+                </p>
+            </div>
+        {% else %}
+        <div class="shadow-lg p-3 mb-5 bg-body rounded text-success bg-success bg-opacity-10 ">
+            <p class="lead">
+                <strong>SALE: ${{product.get_price|floatformat:2}}</strong>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% endblock%}
