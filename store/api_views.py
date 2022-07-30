@@ -39,6 +39,8 @@ class ProductList(ListAPIView):
 
 
 class ProductCreate(CreateAPIView):
+    authentication_classes = ()
+    permission_classes = ()
     serializer_class=ProductSerializer
 
     def create(self, request, *args, **kwargs):
