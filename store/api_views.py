@@ -3,16 +3,16 @@ from rest_framework.generics import ListAPIView
 from store.serializers import ProductSerializer
 from store.models import Product
 
-# from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 
 class ProductList(ListAPIView):
     queryset =  Product.objects.all()
     serializer_class = ProductSerializer
-    # filter_backends=(DjangoFilterBackend,)
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('id',)
+    filter_backends=(DjangoFilterBackend,SearchFilter)
+    filterset_fields = ('id', )  #note dont use filter_fields
+    search_fields = ('name', 'description')
 
     def get_queryset(self):
         on_sale = self.request.query_params.get('on_sale', None)
