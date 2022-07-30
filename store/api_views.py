@@ -6,6 +6,12 @@ from store.models import Product
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 
+from rest_framework.pagination import LimitOffsetPagination
+
+
+class ProductsPagination(LimitOffsetPagination):
+    default_limit=10
+    max_limit=100
 
 class ProductList(ListAPIView):
     queryset =  Product.objects.all()
@@ -13,6 +19,8 @@ class ProductList(ListAPIView):
     filter_backends=(DjangoFilterBackend,SearchFilter)
     filterset_fields = ('id', )  #note dont use filter_fields
     search_fields = ('name', 'description')
+    pagination_class = ProductsPagination
+
 
     def get_queryset(self):
         on_sale = self.request.query_params.get('on_sale', None)
@@ -27,3 +35,4 @@ class ProductList(ListAPIView):
                 sale_end__gte=now,
             )
         return queryset
+

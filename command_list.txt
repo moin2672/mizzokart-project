@@ -19,3 +19,5 @@ Stunning: Experience sharp details and crisp colors on the 15.6\\" Full HD displ
 gaming and staying connected with multiple devices at home.","price":46990.0,"sale_start":"2022-07-29T18:37:45Z","sale_end":"2022-08-15T18:37:58Z","is_on_sale":true,"current_sale":42291.0}'
 >>>
 
+
+#try this url for pagination: http://127.0.0.1:8000/api/v1/products/?limit=3
