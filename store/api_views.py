@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
 
 from store.serializers import ProductSerializer
 from store.models import Product
@@ -8,6 +8,7 @@ from rest_framework.filters import SearchFilter
 
 from rest_framework.pagination import LimitOffsetPagination
 
+from rest_framework.exceptions import ValidationError
 
 class ProductsPagination(LimitOffsetPagination):
     default_limit=10
@@ -36,3 +37,16 @@ class ProductList(ListAPIView):
             )
         return queryset
 
+
+class ProductCreate(CreateAPIView):
+    serializer_class=ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            price = request.data.get('price')
+            if price is not None and float(price)<=0.0:
+                raise ValidationError({'price' : 'Must be above $0.00'})
+        except ValueError:
+            raise ValidationError({'price':'A valid number is required'})
+
+        return super().create(request,  *args, **kwargs)
