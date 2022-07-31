@@ -40,3 +40,34 @@ gaming and staying connected with multiple devices at home.","price":46990.0,"sa
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100    58  100    58    0     0   3437      0 --:--:-- --:--:-- --:--:--  3625
+
+(.venv) PS C:\Users\Moiz\Downloads\Projects\Django REST\mizzokart-project> python manage.py shell
+Python 3.10.5 (tags/v3.10.5:f377153, Jun  6 2022, 16:14:13) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import json                               
+>>> from store.models import *
+>>> from store.serializers import *
+>>> product =  Product.objects.all().first()
+>>> cart = ShoppingCart()
+>>> cart.save()
+>>> item = ShoppingCartItem(shopping_cart=cart, product=product, quantity=5)
+>>> item.save()
+>>> serializer = ProductSerializer(product)
+>>> print(json.dumps(serializer.data, indent=2))
+{
+  "id": 1,
+  "name": "Acer Aspire 5 6666",
+  "description": "Powerful Productivity: 11th Generation Intel Core i5-1135G7 processor delivers unmatched speed and intelligence, enabling impressive creating, productivity, and gaming experiences. With Turbo Boost Technology, get up to 4.2GHz for your high-demand applications\r\nVisibly Stunning: Experience sharp details and crisp colors on the 15.6\" Full HD display with 82.58% screen-to-body, 16:9 aspect ratio and narrow bezels\r\nErgonomic Typing: Ergonomically-designed hinge lifts the keyboard for comfortable typing, improved cooling, and a better sound experience\r\nInternal Specifications: 2*4 GB DDR4 memory - 4GB DDR4 on-board memory and 4 GB system memory, upgradable up to 24GB; 1 TB HDD and ssd slot which can be expandable up 1 TB available to store your files and media\r\nConnect More : Dual-band Wi-Fi 6 connection is nearly 3x faster than the previous standard, giving you the best experience for browsing; streaming, gaming and staying connected with multiple devices at home.",
+  "price": 46990.0,
+  "sale_start": "2022-07-29T18:37:45Z",
+  "sale_end": "2022-08-15T18:37:58Z",
+  "is_on_sale": true,
+  "current_price": 42291.0,
+  "cart_items": [
+    {
+      "product": 1,
+      "quantity": 5
+    }
+  ]
+}
