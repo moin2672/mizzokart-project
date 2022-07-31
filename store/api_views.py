@@ -1,4 +1,6 @@
-from rest_framework.generics import ListAPIView, CreateAPIView
+from ast import Delete
+from urllib import response
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 
 from store.serializers import ProductSerializer
 from store.models import Product
@@ -52,3 +54,19 @@ class ProductCreate(CreateAPIView):
             raise ValidationError({'price':'A valid number is required'})
 
         return super().create(request,  *args, **kwargs)
+
+
+class ProductDestroy(DestroyAPIView):
+    authentication_classes = ()
+    permission_classes = ()
+    queryset=Product.objects.all()
+    lookup_field='id'
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('id')
+        response = super().delete(self, request, *args, **kwargs)
+
+        if response.status_code==204:
+            from django.core.cache import cache
+            cache.delete('product_data_{}'.format(product_id))
+        return response

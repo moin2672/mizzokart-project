@@ -27,3 +27,16 @@ gaming and staying connected with multiple devices at home.","price":46990.0,"sa
                                  Dload  Upload   Total   Spent    Left  Speed
 100   190  100   140  100    50   1599    571 --:--:-- --:--:-- --:--:--  2209
 (.venv) PS C:\Users\Moiz\Downloads\Projects\Django REST\mizzokart-project> 
+
+
+(.venv) PS C:\Users\Moiz\Downloads\Projects\Django REST\mizzokart-project> curl.exe -X DELETE http://127.0.0.1:8000/api/v1/products/10/destroy -o file2.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+(.venv) PS C:\Users\Moiz\Downloads\Projects\Django REST\mizzokart-project>  curl.exe -X POST -d price=1.00 -d name='My Product' -d description='Hello World' http://127.0.0.1:8000/api/v1/products/new -o file3.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   191  100   141  100    50   4875   1728 --:--:-- --:--:-- --:--:--  6821
+(.venv) PS C:\Users\Moiz\Downloads\Projects\Django REST\mizzokart-project> curl.exe -X DELETE http://127.0.0.1:8000/api/v1/products/11/destroy -o file2.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    58  100    58    0     0   3437      0 --:--:-- --:--:-- --:--:--  3625
